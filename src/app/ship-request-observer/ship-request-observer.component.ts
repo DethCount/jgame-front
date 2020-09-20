@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
+
+import { TranslateService } from '@ngx-translate/core'
+
+import { ShipRequestObserver } from '../ship-request-observer'
 
 @Component({
   selector: 'app-ship-request-observer',
@@ -6,10 +10,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ship-request-observer.component.sass']
 })
 export class ShipRequestObserverComponent implements OnInit {
+  @Input() observer: ShipRequestObserver
 
-  constructor() { }
+  tooltip: string = ""
+
+  constructor(private translate: TranslateService) { }
 
   ngOnInit(): void {
+    this.translate.get(""+this.observer.request.type)
+      .subscribe((data) => {
+        this.tooltip = data
+      })
   }
 
 }

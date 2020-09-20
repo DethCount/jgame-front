@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core'
 
 import { TranslateService } from '@ngx-translate/core'
 
 import { Game } from '../game'
+import { GameService } from '../game/game.service'
 import { ShipType } from '../ship-type'
+import { ShipRequest } from '../ship-request'
 
 @Component({
   selector: 'app-ship',
@@ -15,10 +17,15 @@ export class ShipComponent implements OnInit {
   @Input() type: string
   @Input() nb: number
 
+  @Output() onbuild = new EventEmitter<Game>()
+
   realType: ShipType
   tooltip: string = ""
 
-  constructor(private translate: TranslateService) {
+  constructor(
+    private translate: TranslateService,
+    private gameService: GameService
+  ) {
   }
 
   ngOnInit() {
@@ -29,4 +36,18 @@ export class ShipComponent implements OnInit {
       });
   }
 
+  buildNextLevel(event) {
+    this.gameService.pushToProd(
+      "Shipyard",
+      new ShipRequest(
+        this.realType,
+        1,
+        this.game,
+        undefined
+      )
+    )
+      .subscribe((data: Game) => {
+        this.onbuild.emit(data);
+      });
+  }
 }

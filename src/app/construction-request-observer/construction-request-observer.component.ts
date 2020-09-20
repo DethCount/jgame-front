@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core'
 
 import { TranslateService } from '@ngx-translate/core'
 
-import { ConstructionType } from '../construction-type'
 import { ConstructionRequestObserver } from '../construction-request-observer'
 
 @Component({
@@ -12,6 +11,7 @@ import { ConstructionRequestObserver } from '../construction-request-observer'
 })
 export class ConstructionRequestObserverComponent implements OnInit {
   @Input() observer: ConstructionRequestObserver
+
   tooltip: string = ""
 
   constructor(private translate: TranslateService) { }

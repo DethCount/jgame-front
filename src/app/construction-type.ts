@@ -6,5 +6,7 @@ export enum ConstructionType {
     CrystalWarehouse,
     DeuteriumWarehouse,
     Shipyard,
-    Laboratory
+    Laboratory,
+    DataCenter,
+    Observatory,
 }
