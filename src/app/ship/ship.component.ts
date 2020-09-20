@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core'
 
 import { TranslateService } from '@ngx-translate/core'
 
+import { Game } from '../game'
 import { ShipType } from '../ship-type'
 
 @Component({
@@ -10,6 +11,7 @@ import { ShipType } from '../ship-type'
   styleUrls: ['./ship.component.sass']
 })
 export class ShipComponent implements OnInit {
+  @Input() game: Game
   @Input() type: string
   @Input() nb: number
 

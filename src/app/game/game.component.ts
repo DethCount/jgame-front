@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Game } from '../game';
 
 @Component({
@@ -8,4 +8,9 @@ import { Game } from '../game';
 })
 export class GameComponent {
     @Input() game: Game
+    @Output() onbuild = new EventEmitter<Game>()
+
+    onBuild($event) {
+        this.onbuild.emit($event);
+    }
 }

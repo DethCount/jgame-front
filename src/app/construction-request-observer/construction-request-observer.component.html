@@ -1,1 +1,3 @@
-<p>construction-request-observer works!</p>
+<div [ngClass]="['construction-request-observer', observer.request.type]" data-toggle="tooltip" [title]="tooltip">
+    <span class="level" [innerText]="observer.request.level"></span>
+</div>

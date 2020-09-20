@@ -35,6 +35,6 @@
 
 <main class="container">
 
-  <app-game *ngIf="isLoaded" [game]="game"></app-game>
+  <app-game *ngIf="isLoaded" [game]="game" (onbuild)="onBuild($event)"></app-game>
 
 </main><!-- /.container -->
