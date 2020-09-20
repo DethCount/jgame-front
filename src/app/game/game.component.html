@@ -1,0 +1,25 @@
+<h1>Hello <span [innerText]="game.player"></span></h1>
+
+<div class="constructions">
+    <app-construction
+        *ngFor="let item of game.constructions | keyvalue"
+        [type]="item.key"
+        [level]="item.value"
+        ></app-construction>
+</div>
+
+<div class="ships">
+    <app-ship
+        *ngFor="let item of game.ships | keyvalue"
+        [type]="item.key"
+        [nb]="item.value"
+        ></app-ship>
+</div>
+
+<div class="constructions-production">
+    <app-construction-request-observer *ngFor="let construction of game.constructionProduction" [construction]="construction"></app-construction-request-observer>
+</div>
+
+<div class="ships-production">
+    <app-ship-request-observer *ngFor="let ship of game.shipProduction" [ship]="ship"></app-ship-request-observer>
+</div>

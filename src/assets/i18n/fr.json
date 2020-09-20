@@ -1,0 +1,24 @@
+{
+    "MetalMine": "Mine de métal",
+    "CrystalMine" : "Mine de cristal",
+    "DeuteriumMine" : "Mine de deutérium",
+    "MetalWarehouse" : "Entrepôt de métal",
+    "CrystalWarehouse" : "Entrepôt de cristal",
+    "DeuteriumWarehouse" : "Entrepôt de deutérium",
+    "Shipyard" : "Chantier spatial",
+    "Laboratory" : "Laboratoire",
+
+    "SpaceShuttle" : "Navette spatiale",
+    "Probe" : "Sonde",
+    "LightFighter" : "Chasseur léger",
+    "LightCargo" : "Transporteur léger",
+    "HeavyFighter" : "Chasseur lourd",
+    "HeavyCargo" : "Transporteur lourd",
+    "SpaceStation" : "Station spatiale",
+    "Colonial" : "Vaisseau colonial",
+    "Cruiser" : "Croiseur",
+    "Battleship" : "Vaisseau de bataille",
+    "Destroyer" : "Destroyer",
+    "DeathStar" : "Etoile de la mort",
+    "Halo" : "Anneau"
+}
