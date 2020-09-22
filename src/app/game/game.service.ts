@@ -15,8 +15,8 @@ export class GameService {
     return this.http.get<Game>(this.baseUrl + "/game/" + id);
   }
 
-  pushToProd(listName, request: ProductionRequest) {
-    console.log('pushToProd', listName, request);
+  pushToProd(request: ProductionRequest) {
+    console.log('pushToProd', request);
 
     let data: object = {"_type": '.' + request.constructor.name};
     for (let attr in request) {
@@ -28,7 +28,7 @@ export class GameService {
     }
 
     return this.http.post<Game>(
-      this.baseUrl + "/game/" + request.game.id + "/production/" + listName,
+      this.baseUrl + "/game/" + request.game.id + "/build",
       data
     );
   }

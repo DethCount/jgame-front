@@ -38,7 +38,6 @@ export class ConstructionComponent implements OnInit {
 
   buildNextLevel(event) {
     this.gameService.pushToProd(
-      "Constructions",
       new ConstructionRequest(
         this.realType,
         this.level + 1,

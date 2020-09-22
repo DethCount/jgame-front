@@ -38,7 +38,6 @@ export class ShipComponent implements OnInit {
 
   buildNextLevel(event) {
     this.gameService.pushToProd(
-      "Shipyard",
       new ShipRequest(
         this.realType,
         1,
