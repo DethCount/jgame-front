@@ -8,9 +8,4 @@ import { Game } from '../game';
 })
 export class GameComponent {
     @Input() game: Game
-    @Output() onbuild = new EventEmitter<Game>()
-
-    onBuild($event) {
-        this.onbuild.emit($event);
-    }
 }

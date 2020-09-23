@@ -2,8 +2,8 @@ import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core'
 
 import { TranslateService } from '@ngx-translate/core'
 
-import { Game } from '../game'
-import { GameService } from '../game/game.service'
+import { AdministrableLocation } from '../administrable-location'
+import { AdministrableLocationService } from '../administrable-location/administrable-location.service'
 import { ShipType } from '../ship-type'
 import { ShipRequest } from '../ship-request'
 
@@ -13,18 +13,18 @@ import { ShipRequest } from '../ship-request'
   styleUrls: ['./ship.component.sass']
 })
 export class ShipComponent implements OnInit {
-  @Input() game: Game
+  @Input() administrableLocation: AdministrableLocation
   @Input() type: string
   @Input() nb: number
 
-  @Output() onbuild = new EventEmitter<Game>()
+  @Output() onbuild = new EventEmitter<AdministrableLocation>()
 
   realType: ShipType
   tooltip: string = ""
 
   constructor(
     private translate: TranslateService,
-    private gameService: GameService
+    private administrableLocationService: AdministrableLocationService
   ) {
   }
 
@@ -37,15 +37,15 @@ export class ShipComponent implements OnInit {
   }
 
   buildNextLevel(event) {
-    this.gameService.pushToProd(
+    this.administrableLocationService.pushToProd(
       new ShipRequest(
         this.realType,
         1,
-        this.game,
+        this.administrableLocation,
         undefined
       )
     )
-      .subscribe((data: Game) => {
+      .subscribe((data: AdministrableLocation) => {
         this.onbuild.emit(data);
       });
   }

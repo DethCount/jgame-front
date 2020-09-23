@@ -1,11 +1,14 @@
-import { Game } from './game'
+import { AdministrableLocation } from './administrable-location'
 
 export class ProductionRequest {
     id: number
-    game: Game
+    administrableLocation: AdministrableLocation
 
-    constructor(id: number, game: Game) {
+    constructor(
+        id: number,
+        administrableLocation: AdministrableLocation
+    ) {
         this.id = id;
-        this.game = game;
+        this.administrableLocation = administrableLocation;
     }
 }

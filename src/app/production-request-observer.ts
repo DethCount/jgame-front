@@ -1,5 +1,5 @@
 import { ProductionRequestStatus } from './production-request-status'
-import { Game } from './game'
+import { AdministrableLocation } from './administrable-location'
 import { ProductionRequest } from './production-request'
 
 export class ProductionRequestObserver {
@@ -7,19 +7,19 @@ export class ProductionRequestObserver {
     startedAt: Date
     finishedAt: Date
     status: ProductionRequestStatus
-    game: Game
+    administrableLocation: AdministrableLocation
 
     constructor(
         id: number,
         startedAt: Date,
         finishedAt: Date,
         status: ProductionRequestStatus,
-        game: Game
+        administrableLocation: AdministrableLocation
     ) {
         this.id = id
         this.startedAt = startedAt
         this.finishedAt = finishedAt
         this.status = status
-        this.game = game
+        this.administrableLocation = administrableLocation
     }
 }

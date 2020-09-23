@@ -1,0 +1,39 @@
+<h2 [innerText]="administrableLocation.name"></h2>
+
+<h3>Constructions</h3>
+<div class="constructions">
+    <app-construction
+        *ngFor="let item of administrableLocation.constructions | keyvalue"
+        [administrableLocation]="administrableLocation"
+        [type]="item.key"
+        [level]="item.value"
+        (onbuild)="onBuild($event)"
+        ></app-construction>
+</div>
+
+<h3>Vaisseaux</h3>
+<div class="ships">
+    <app-ship
+        *ngFor="let item of administrableLocation.ships | keyvalue"
+        [administrableLocation]="administrableLocation"
+        [type]="item.key"
+        [nb]="item.value"
+        (onbuild)="onBuild($event)"
+        ></app-ship>
+</div>
+
+<h3>Constructions en cours</h3>
+<div class="constructions-production">
+    <app-construction-request-observer
+        *ngFor="let observer of administrableLocation.constructionProduction"
+        [observer]="observer"
+        ></app-construction-request-observer>
+</div>
+
+<h3>Vaisseaux en cours</h3>
+<div class="ships-production">
+    <app-ship-request-observer
+        *ngFor="let observer of administrableLocation.shipProduction"
+        [observer]="observer"
+        ></app-ship-request-observer>
+</div>

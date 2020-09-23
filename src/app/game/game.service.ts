@@ -7,29 +7,11 @@ import { ProductionRequest } from '../production-request';
   providedIn: 'root'
 })
 export class GameService {
-  baseUrl: string = "http://localhost:8080"
+  baseUrl: string = "http://localhost:8080/game"
 
   constructor(private http: HttpClient) { }
 
   get(id: number) {
-    return this.http.get<Game>(this.baseUrl + "/game/" + id);
-  }
-
-  pushToProd(request: ProductionRequest) {
-    console.log('pushToProd', request);
-
-    let data: object = {"_type": '.' + request.constructor.name};
-    for (let attr in request) {
-      if (attr == "game") {
-        continue;
-      }
-
-      data[attr] = request[attr];
-    }
-
-    return this.http.post<Game>(
-      this.baseUrl + "/game/" + request.game.id + "/build",
-      data
-    );
+    return this.http.get<Game>(this.baseUrl + "/" + id);
   }
 }

@@ -1,29 +1,16 @@
 <h1>Hello <span [innerText]="game.player"></span></h1>
 
-<div class="constructions">
-    <app-construction
-        *ngFor="let item of game.constructions | keyvalue"
-        [game]="game"
-        [type]="item.key"
-        [level]="item.value"
-        (onbuild)="onBuild($event)"
-        ></app-construction>
+<div
+    class="locations"
+    *ngIf="game.administrableLocations.length > 1; else singleLocation"
+    >
+    <app-administrable-location
+        *ngFor="let administrableLocation of game.administrableLocations"
+        [administrableLocation]="administrableLocation"
+        ></app-administrable-location>
 </div>
-
-<div class="ships">
-    <app-ship
-        *ngFor="let item of game.ships | keyvalue"
-        [game]="game"
-        [type]="item.key"
-        [nb]="item.value"
-        (onbuild)="onBuild($event)"
-        ></app-ship>
-</div>
-
-<div class="constructions-production">
-    <app-construction-request-observer *ngFor="let observer of game.constructionProduction" [observer]="observer"></app-construction-request-observer>
-</div>
-
-<div class="ships-production">
-    <app-ship-request-observer *ngFor="let observer of game.shipProduction" [observer]="observer"></app-ship-request-observer>
-</div>
+<ng-template #singleLocation>
+    <app-administrable-location
+        [administrableLocation]="game.administrableLocations[0]"
+        ></app-administrable-location>
+</ng-template>

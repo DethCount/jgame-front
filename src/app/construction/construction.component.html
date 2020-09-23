@@ -1,3 +1,11 @@
-<div (click)="buildNextLevel($event)" [ngClass]="['construction', type]" data-toggle="tooltip" [title]="tooltip">
-    <span class="level" [innerText]="level"></span>
+<div
+    (click)="buildNextLevel($event)"
+    [ngClass]="['construction', type]"
+    data-toggle="tooltip"
+    [title]="tooltip"
+    >
+    <span
+        class="level"
+        [innerText]="level"
+        ></span>
 </div>
