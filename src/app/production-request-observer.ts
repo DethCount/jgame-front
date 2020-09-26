@@ -2,7 +2,7 @@ import { ProductionRequestStatus } from './production-request-status'
 import { AdministrableLocation } from './administrable-location'
 import { ProductionRequest } from './production-request'
 
-export class ProductionRequestObserver {
+export abstract class ProductionRequestObserver {
     id: number
     startedAt: Date
     finishedAt: Date

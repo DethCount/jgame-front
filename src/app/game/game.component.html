@@ -1,16 +1,32 @@
-<h1>Hello <span [innerText]="game.player"></span></h1>
+<ng-container
+    *ngIf="game.administrableLocations.length <= 1; else multipleLocations">
+    <ng-container *ngTemplateOutlet="singleLocation"
+        ></ng-container>
+</ng-container>
 
-<div
-    class="locations"
-    *ngIf="game.administrableLocations.length > 1; else singleLocation"
-    >
-    <app-administrable-location
-        *ngFor="let administrableLocation of game.administrableLocations"
-        [administrableLocation]="administrableLocation"
-        ></app-administrable-location>
-</div>
+<ng-template #multipleLocations>
+    <div class="row">
+        <div class="col-sm-2">
+            <ng-container
+                *ngFor="let administrableLocation of game.administrableLocations | keyvalue"
+                >
+                <div
+                    class="administrable-location-btn"
+                    (click)="changeCurrentAdministrableLocation(administrableLocation.key)"
+                    >
+                </div>
+            </ng-container>
+        </div>
+        <div class="col-sm-10">
+            <ng-container *ngTemplateOutlet="singleLocation">
+            </ng-container>
+        </div>
+    </div>
+</ng-template>
+
 <ng-template #singleLocation>
+    <h1>Hello <span [innerText]="game.player"></span></h1>
     <app-administrable-location
-        [administrableLocation]="game.administrableLocations[0]"
+        [administrableLocation]="currentAdministrableLocation"
         ></app-administrable-location>
 </ng-template>

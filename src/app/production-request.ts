@@ -1,6 +1,6 @@
 import { AdministrableLocation } from './administrable-location'
 
-export class ProductionRequest {
+export abstract class ProductionRequest {
     id: number
     administrableLocation: AdministrableLocation
 

@@ -7,9 +7,10 @@ export class AdministrableLocation {
     id: number
     name: string
     slug: string
+    path: string
     lastResourceUpdate: Date
     type: AdministrableLocationType
-    game: number
+    game: Game
     ships: object
     constructions: object
     shipProduction: ShipRequestObserver[]

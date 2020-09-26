@@ -25,19 +25,19 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
       this.gameService.get(1)
-          .subscribe((data: Game) => {
+          .subscribe((data) => {
               this.game = data
-              console.log(this.game)
+              console.log('app.component.ngOnInit', data)
               this.isLoaded = true
           })
   }
 
   refreshGame() {
-    //this.isLoaded = false
+    // this.isLoaded = false
     this.gameService.get(this.game.id)
       .subscribe((data: Game) => {
         this.game = data
-        //this.isLoaded = true;
+        // this.isLoaded = true;
       })
   }
 }

@@ -1,23 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 
-import { ProductionRequest } from '../production-request';
+import { ProductionRequest } from '../production-request'
 import { AdministrableLocation } from '../administrable-location'
+
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+import { EntitySerializerService } from '../entity-serializer.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdministrableLocationService {
-  baseUrl: string = "http://localhost:8080/at"
 
-  constructor(private http: HttpClient) { }
+  baseUrl: string = "http://localhost:8080"
 
-  get(slug: string, gameId: number) {
-    return this.http.get<AdministrableLocation>(
+  constructor(private http: HttpClient, private serializer: EntitySerializerService) { }
+
+  get(gameId: number, path: string) {
+    return this.http.get<any>(
         this.baseUrl
-          + "/" + slug
-            + "-" + gameId
-    );
+          + "/game/" + gameId
+          + "/at/" + path
+      )
+        .pipe(
+          map(data => this.serializer.deserialize<AdministrableLocation>(
+              Object.assign(new AdministrableLocation(), data)
+            )
+          )
+        )
   }
 
   pushToProd(request: ProductionRequest) {
@@ -25,19 +37,33 @@ export class AdministrableLocationService {
 
     let data: object = {"_type": '.' + request.constructor.name};
     for (let attr in request) {
-      if (attr == "game") {
+      if (attr == "game" || attr == "id") {
+        continue;
+      }
+
+      if (attr == 'type') {
+        data[attr] = request['type']['name'];
         continue;
       }
 
       data[attr] = request[attr];
     }
 
-    return this.http.post<AdministrableLocation>(
+    data = this.serializer.serialize(data);
+    console.log(data);
+
+    return this.http.post<any>(
       this.baseUrl
-        + "/" + request.administrableLocation.slug
-          + "-" + request.administrableLocation.game
+        + "/game/" + request.administrableLocation.game.id
+          + "/at/" + request.administrableLocation.path
         + "/build",
       data
-    );
+    )
+      .pipe(
+        map(data => this.serializer.deserialize<AdministrableLocation>(
+            Object.assign(new AdministrableLocation, data)
+          )
+        )
+      )
   }
 }

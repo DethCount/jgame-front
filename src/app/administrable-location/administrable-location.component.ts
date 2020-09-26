@@ -22,7 +22,8 @@ export class AdministrableLocationComponent implements OnInit {
   constructor(private service: AdministrableLocationService) {}
 
   ngOnInit() {
-      this.scheduleRefreshFromObservers(this.administrableLocation)
+    console.log('init administrable-location', this.administrableLocation);
+    this.scheduleRefreshFromObservers(this.administrableLocation)
   }
 
   onBuild($event) {
@@ -38,8 +39,8 @@ export class AdministrableLocationComponent implements OnInit {
   refresh() {
     //this.isLoaded = false
     this.service.get(
-      this.administrableLocation.slug,
-      this.administrableLocation.game
+      this.administrableLocation.game.id,
+      this.administrableLocation.path
     )
       .subscribe((data: AdministrableLocation) => {
         this.administrableLocation = data

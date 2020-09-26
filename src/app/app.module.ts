@@ -1,28 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser'
+import { NgModule } from '@angular/core'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module'
+import { AppComponent } from './app.component'
 
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ButtonsModule } from 'ngx-bootstrap/buttons'
+import { TabsModule } from 'ngx-bootstrap/tabs'
+import { ModalModule } from 'ngx-bootstrap/modal'
+import { TooltipModule } from 'ngx-bootstrap/tooltip'
+import { CollapseModule } from 'ngx-bootstrap/collapse'
 
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { TranslateModule, TranslateLoader, TranslateCompiler } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { TranslateModule, TranslateLoader, TranslateCompiler } from '@ngx-translate/core'
 
-import { GameComponent } from './game/game.component';
-import { ConstructionComponent } from './construction/construction.component';
-import { ShipComponent } from './ship/ship.component';
-import { ConstructionRequestObserverComponent } from './construction-request-observer/construction-request-observer.component';
-import { ShipRequestObserverComponent } from './ship-request-observer/ship-request-observer.component';
-import { AdministrableLocationComponent } from './administrable-location/administrable-location.component';
+import { GameComponent } from './game/game.component'
+import { ConstructionComponent } from './construction/construction.component'
+import { ShipComponent } from './ship/ship.component'
+import { ConstructionRequestObserverComponent } from './construction-request-observer/construction-request-observer.component'
+import { ShipRequestObserverComponent } from './ship-request-observer/ship-request-observer.component'
+import { AdministrableLocationComponent } from './administrable-location/administrable-location.component'
 
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, "/assets/i18n/", ".json");
+  return new TranslateHttpLoader(http, "/assets/i18n/", ".json")
 }
 
 @NgModule({

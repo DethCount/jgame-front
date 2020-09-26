@@ -14,23 +14,21 @@ import { AdministrableLocationService } from '../administrable-location/administ
 })
 export class ConstructionComponent implements OnInit {
   @Input() administrableLocation: AdministrableLocation
-  @Input() type: string
+  @Input() type: ConstructionType
   @Input() level: number
 
   @Output() onbuild = new EventEmitter<AdministrableLocation>()
 
-  realType: ConstructionType
   tooltip: string = ""
 
   constructor(
     private translate: TranslateService,
     private administrableLocationService: AdministrableLocationService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
-    this.realType = ConstructionType[this.type];
-    this.translate.get(this.type)
+    console.log('construction init', this.administrableLocation, this.type, this.level);
+    this.translate.get(this.type.name)
       .subscribe((data: string) => {
         this.tooltip = data;
       });
@@ -39,7 +37,7 @@ export class ConstructionComponent implements OnInit {
   buildNextLevel(event) {
     this.administrableLocationService.pushToProd(
       new ConstructionRequest(
-        this.realType,
+        this.type,
         this.level + 1,
         this.administrableLocation,
         undefined
