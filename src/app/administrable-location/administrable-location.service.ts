@@ -50,7 +50,6 @@ export class AdministrableLocationService {
     }
 
     data = this.serializer.serialize(data);
-    console.log(data);
 
     return this.http.post<any>(
       this.baseUrl

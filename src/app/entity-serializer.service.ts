@@ -36,10 +36,17 @@ export class EntitySerializerService {
   idProperty: string = "@id"
 
   public serialize(data: object, className?: string) {
-    return this.serializeJson(new SerializationContext, data, className)
+    console.log('serialize', data, className);
+
+    data = this.serializeJson(new SerializationContext, data, className)
+
+    console.log('serialize end', data);
+
+    return data;
   }
 
   public deserialize<T>(data: T) {
+    console.log('deserialize', data);
     let context = new SerializationContext
 
     this.extractEntities(context, data, [])
@@ -47,6 +54,8 @@ export class EntitySerializerService {
     data = this.populateDbAndSerializeEntities(context, data)
 
     data = this.replaceRefs(context, data)
+
+    console.log('deserialize end', data);
 
     return data
   }
@@ -125,7 +134,7 @@ export class EntitySerializerService {
   private modifyDeeply(data: any, path: string[], value: any) {
     // console.log('modifyDeeply', data, path, value);
     if (path.length == 0 && data instanceof Object) {
-      console.log(path.join('/'), value);
+      // console.log(path.join('/'), value);
       Object.assign(data, value);
 
       return data;
@@ -144,14 +153,15 @@ export class EntitySerializerService {
 
   private serializeJson(context: SerializationContext, data: any, className?: string) {
     if (data instanceof Array) {
+      let arr = [];
       for (let idx in data) {
-        data[idx] = this.serializeJson(context, data[idx]);
+        arr[idx] = this.serializeJson(context, data[idx]);
       }
+      return arr;
     } else if (data instanceof Object) {
       let obj = {};
 
       if (data.hasOwnProperty('id')) {
-        // console.log(data.hasOwnProperty('id'), data['id'], data);
         let id = data['id']
             + '@' + (className != undefined ? className : data.constructor.name);
 
@@ -172,7 +182,7 @@ export class EntitySerializerService {
 
     if (typeof data == "string" && this.refRegex.test(data)) {
       let matches = data.match(this.refRegex);
-      // console.log(data, matches, context.db.hasOwnProperty(data));
+
       if (context.db.hasOwnProperty(data)) {
         console.log(context.db[data]);
         return context.db[data];
@@ -180,7 +190,6 @@ export class EntitySerializerService {
 
       let obj = new MODEL[matches['groups']['class']];
       obj.id = matches['groups']['id'];
-      //console.log(obj);
 
       return obj;
     }

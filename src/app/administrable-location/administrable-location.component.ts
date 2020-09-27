@@ -27,6 +27,7 @@ export class AdministrableLocationComponent implements OnInit {
   }
 
   onBuild($event) {
+    console.log('onBuild', $event);
     if (this.nextRefresh == undefined
       || this.nextRefresh < (new Date).getTime() + 50
     ) {
@@ -37,12 +38,14 @@ export class AdministrableLocationComponent implements OnInit {
   }
 
   refresh() {
+    console.log('administrableLocation refresh');
     //this.isLoaded = false
     this.service.get(
       this.administrableLocation.game.id,
       this.administrableLocation.path
     )
       .subscribe((data: AdministrableLocation) => {
+        console.log('administrableLocation refresh subscribe', data);
         this.administrableLocation = data
         this.scheduleRefreshFromObservers(data)
         //this.isLoaded = true;
@@ -56,6 +59,7 @@ export class AdministrableLocationComponent implements OnInit {
    * min time is 50ms
    */
   scheduleRefreshFromObservers(administrableLocation: AdministrableLocation) {
+    console.log('scheduleRefreshFromObservers', administrableLocation);
     let now = (new Date).getTime();
 
     let vals = [], ids = [];

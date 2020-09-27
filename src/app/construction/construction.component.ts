@@ -44,7 +44,9 @@ export class ConstructionComponent implements OnInit {
       )
     )
       .subscribe((data: AdministrableLocation) => {
+        console.log('buildNextLevel subscribe', data, this.onbuild);
         this.onbuild.emit(data);
+        console.log('emitted', data, this.onbuild);
       });
   }
 }
