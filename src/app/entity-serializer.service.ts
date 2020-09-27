@@ -106,12 +106,24 @@ export class EntitySerializerService {
     }
   }
 
+  private instanciateModel(className: string, checkExisting?: boolean) {
+    if (checkExisting !== false && !MODEL.hasOwnProperty(className)) {
+      throw new Error("Model not found: " + className)
+    }
+
+    if (!(MODEL[className] instanceof Function)) {
+      throw new Error("Model has no constructor: " + className)
+    }
+
+    return new MODEL[className]
+  }
+
   private populateDbAndSerializeEntities(context: SerializationContext, data: any) {
     for (let i = context.stack.length - 1; i >= 0; i--) {
       let matches = context.stack[i]['id'].match(this.refRegex);
       let obj = {};
       if (MODEL.hasOwnProperty(matches['groups']['class'])) {
-        obj = new MODEL[matches['groups']['class']]();
+        obj = this.instanciateModel(matches['groups']['class'], false);
       }
 
       context.db[context.stack[i]['id']] = this.deserializeJson(
@@ -188,8 +200,8 @@ export class EntitySerializerService {
         return context.db[data];
       }
 
-      let obj = new MODEL[matches['groups']['class']];
-      obj.id = matches['groups']['id'];
+      let obj = this.instanciateModel(matches['groups']['class']);
+      obj['id'] = matches['groups']['id'];
 
       return obj;
     }
@@ -234,8 +246,8 @@ export class EntitySerializerService {
         val = context.db[context.refs[i]['id']];
       } else {
         let matches = context.refs[i]['id'].match(this.refRegex);
-        val = new MODEL[matches['groups']['class']];
-        val.id = matches['groups']['id'];
+        val = this.instanciateModel(matches['groups']['class']);
+        val['id'] = matches['groups']['id'];
       }
 
       this.modifyDeeply(

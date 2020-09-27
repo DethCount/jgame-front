@@ -17,7 +17,7 @@ export class ConstructionComponent implements OnInit {
   @Input() type: ConstructionType
   @Input() level: number
 
-  @Output() onbuild = new EventEmitter<AdministrableLocation>()
+  @Output() build = new EventEmitter<ConstructionComponent>()
 
   tooltip: string = ""
 
@@ -28,6 +28,7 @@ export class ConstructionComponent implements OnInit {
 
   ngOnInit() {
     console.log('construction init', this.administrableLocation, this.type, this.level);
+    console.log("Build Observers: " + this.build.observers.length);
     this.translate.get(this.type.name)
       .subscribe((data: string) => {
         this.tooltip = data;
@@ -44,9 +45,10 @@ export class ConstructionComponent implements OnInit {
       )
     )
       .subscribe((data: AdministrableLocation) => {
-        console.log('buildNextLevel subscribe', data, this.onbuild);
-        this.onbuild.emit(data);
-        console.log('emitted', data, this.onbuild);
+        console.log('buildNextLevel subscribe', data, this.build);
+        this.administrableLocation = data;
+        this.build.emit(this);
+        console.log('emitted', this);
       });
   }
 }

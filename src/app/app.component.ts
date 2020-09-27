@@ -32,7 +32,13 @@ export class AppComponent implements OnInit {
           })
   }
 
+  onGameNeedsRefresh($event) {
+    console.log('onGameNeedsRefresh', $event);
+    this.refreshGame();
+  }
+
   refreshGame() {
+    console.log('refreshGame');
     // this.isLoaded = false
     this.gameService.get(this.game.id)
       .subscribe((data: Game) => {

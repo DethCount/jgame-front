@@ -9,7 +9,7 @@
                 [administrableLocation]="administrableLocation"
                 [type]="constructionType"
                 [level]="administrableLocation.constructions[constructionType.name]"
-                (onbuild)="onBuild($event)"
+                (build)="onBuild($event)"
                 ></app-construction>
         </div>
     </div>
@@ -34,7 +34,7 @@
                 [administrableLocation]="administrableLocation"
                 [type]="shipType"
                 [nb]="administrableLocation.ships[shipType.name]"
-                (onbuild)="onBuild($event)"
+                (build)="onBuild($event)"
                 ></app-ship>
         </div>
     </div>

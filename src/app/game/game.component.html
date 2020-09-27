@@ -10,11 +10,10 @@
             <ng-container
                 *ngFor="let administrableLocation of game.administrableLocations | keyvalue"
                 >
-                <div
-                    class="administrable-location-btn"
+                <app-administrable-location-btn
+                    [administrableLocation]="administrableLocation.value"
                     (click)="changeCurrentAdministrableLocation(administrableLocation.key)"
-                    >
-                </div>
+                    ></app-administrable-location-btn>
             </ng-container>
         </div>
         <div class="col-sm-10">
@@ -28,5 +27,7 @@
     <h1>Hello <span [innerText]="game.player"></span></h1>
     <app-administrable-location
         [administrableLocation]="currentAdministrableLocation"
+        (refresh)="onAdministrationLocationRefresh($event)"
+        (builtAdministrableLocation)="onBuiltAdministrableLocation($event)"
         ></app-administrable-location>
 </ng-template>

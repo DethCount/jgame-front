@@ -14,12 +14,11 @@ import { ShipRequest } from '../ship-request'
 })
 export class ShipComponent implements OnInit {
   @Input() administrableLocation: AdministrableLocation
-  @Input() type: string
+  @Input() type: ShipType
   @Input() nb: number
 
-  @Output() onbuild = new EventEmitter<AdministrableLocation>()
+  @Output() build = new EventEmitter<AdministrableLocation>()
 
-  realType: ShipType
   tooltip: string = ""
 
   constructor(
@@ -29,8 +28,7 @@ export class ShipComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.realType = ShipType[this.type]
-    this.translate.get(this.type)
+    this.translate.get(this.type.name)
       .subscribe((data: string) => {
         this.tooltip = data;
       });
@@ -39,14 +37,15 @@ export class ShipComponent implements OnInit {
   buildNextLevel(event) {
     this.administrableLocationService.pushToProd(
       new ShipRequest(
-        this.realType,
+        this.type,
         1,
         this.administrableLocation,
         undefined
       )
     )
       .subscribe((data: AdministrableLocation) => {
-        this.onbuild.emit(data);
+        this.administrableLocation = data
+        this.build.emit(data);
       });
   }
 }

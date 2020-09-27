@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { AdministrableLocation } from '../administrable-location'
+import { AdministrableLocationType } from '../administrable-location-type'
 import { AdministrableLocationService } from './administrable-location.service'
+import { ConstructionComponent } from '../construction/construction.component'
 
 @Component({
   selector: 'app-administrable-location',
@@ -10,7 +12,8 @@ import { AdministrableLocationService } from './administrable-location.service'
 })
 export class AdministrableLocationComponent implements OnInit {
   @Input() administrableLocation : AdministrableLocation
-  @Output() onbuild = new EventEmitter<AdministrableLocation>()
+  @Output() refresh = new EventEmitter<AdministrableLocation>()
+  @Output() builtAdministrableLocation = new EventEmitter<AdministrableLocation>()
 
   refreshSchedulesFrom = {
     'constructionProduction': {},
@@ -23,6 +26,7 @@ export class AdministrableLocationComponent implements OnInit {
 
   ngOnInit() {
     console.log('init administrable-location', this.administrableLocation);
+    //console.log('builtAdministrableLocation observers: ', this.builtAdministrableLocation.observers.length);
     this.scheduleRefreshFromObservers(this.administrableLocation)
   }
 
@@ -31,24 +35,33 @@ export class AdministrableLocationComponent implements OnInit {
     if (this.nextRefresh == undefined
       || this.nextRefresh < (new Date).getTime() + 50
     ) {
-      setTimeout(this.refresh.bind(this), 500);
+      setTimeout(this.doRefresh.bind(this), 500);
     } else {
-      this.scheduleRefreshFromObservers($event);
+      this.scheduleRefreshFromObservers($event.administrableLocation);
     }
   }
 
-  refresh() {
+  doRefresh() {
     console.log('administrableLocation refresh');
-    //this.isLoaded = false
     this.service.get(
       this.administrableLocation.game.id,
       this.administrableLocation.path
     )
       .subscribe((data: AdministrableLocation) => {
         console.log('administrableLocation refresh subscribe', data);
+
+        let newAdministrableConstruction
+          = this.hasNewAdministrableConstruction(data);
         this.administrableLocation = data
-        this.scheduleRefreshFromObservers(data)
-        //this.isLoaded = true;
+
+        if (newAdministrableConstruction) {
+          this.builtAdministrableLocation.emit(this.administrableLocation)
+          console.log('builtAdministrableLocation emitted', this.administrableLocation);
+        } else {
+          this.scheduleRefreshFromObservers(data)
+        }
+
+        this.refresh.emit(data);
       })
   }
 
@@ -58,7 +71,7 @@ export class AdministrableLocationComponent implements OnInit {
    * then use the nearest tick for scheduling next refresh
    * min time is 50ms
    */
-  scheduleRefreshFromObservers(administrableLocation: AdministrableLocation) {
+  private scheduleRefreshFromObservers(administrableLocation: AdministrableLocation) {
     console.log('scheduleRefreshFromObservers', administrableLocation);
     let now = (new Date).getTime();
 
@@ -105,8 +118,33 @@ export class AdministrableLocationComponent implements OnInit {
       this.nextRefresh = t;
 
       console.log('next tick in ', dt, this.refreshSchedulesFrom);
-      setTimeout(this.refresh.bind(this), dt);
+      setTimeout(this.doRefresh.bind(this), dt);
       break;
     }
+  }
+
+  // detect new construction creating a new administrable location
+  // in otder to refresh locations list
+  private hasNewAdministrableConstruction(data: AdministrableLocation) {
+    let nbAdministrableLocations = 0;
+    let administrableConstructionTypes = [];
+
+    for (let construction of data.type.constructions) {
+      if (construction.administrableLocationType) {
+        administrableConstructionTypes.push(construction.name)
+      }
+    }
+
+    let newAdministrableLocation = false;
+    for (let construction of administrableConstructionTypes) {
+      if (data.constructions[construction] == 1
+        && this.administrableLocation.constructions[construction] == 0
+      ) {
+        newAdministrableLocation = true;
+        break;
+      }
+    }
+
+    return newAdministrableLocation;
   }
 }

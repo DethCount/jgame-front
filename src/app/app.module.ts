@@ -19,7 +19,8 @@ import { ConstructionComponent } from './construction/construction.component'
 import { ShipComponent } from './ship/ship.component'
 import { ConstructionRequestObserverComponent } from './construction-request-observer/construction-request-observer.component'
 import { ShipRequestObserverComponent } from './ship-request-observer/ship-request-observer.component'
-import { AdministrableLocationComponent } from './administrable-location/administrable-location.component'
+import { AdministrableLocationComponent } from './administrable-location/administrable-location.component';
+import { AdministrableLocationBtnComponent } from './administrable-location-btn/administrable-location-btn.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json")
@@ -33,7 +34,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ShipComponent,
     ConstructionRequestObserverComponent,
     ShipRequestObserverComponent,
-    AdministrableLocationComponent
+    AdministrableLocationComponent,
+    AdministrableLocationBtnComponent
   ],
   imports: [
     BrowserModule,
