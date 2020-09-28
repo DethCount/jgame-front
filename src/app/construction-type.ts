@@ -6,4 +6,5 @@ export class ConstructionType {
     name: string
     levels: ConstructionTypeLevel[]
     administrableLocationType: AdministrableLocationType
+    dependsOnResearchLevel: object
 }

@@ -1,0 +1,14 @@
+<div
+    [ngClass]="['research-request-observer', observer.request.type]"
+    data-toggle="tooltip"
+    [title]="tooltip"
+    >
+    <span
+        class="text"
+        [innerText]="tooltip"
+        ></span>
+    <span
+        class="level"
+        [innerText]="observer.request.level"
+        ></span>
+</div>

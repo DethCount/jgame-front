@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core'
 
-import { AdministrableLocation } from './administrable-location'
 import { AdministrableLocationType } from './administrable-location-type'
-import { ConstructionRequest } from './construction-request'
+import { AdministrableLocation } from './administrable-location'
 import { ConstructionRequestObserver } from './construction-request-observer'
+import { ConstructionRequest } from './construction-request'
+import { ConstructionTypeLevel } from './construction-type-level'
 import { ConstructionType } from './construction-type'
 import { Game } from './game'
-import { ShipRequest } from './ship-request'
+import { ResearchRequestObserver } from './research-request-observer'
+import { ResearchRequest } from './research-request'
+import { Research } from './research'
 import { ShipRequestObserver } from './ship-request-observer'
+import { ShipRequest } from './ship-request'
 import { ShipType } from './ship-type'
 
 const MODEL = {
-  "AdministrableLocation": AdministrableLocation,
   "AdministrableLocationType": AdministrableLocationType,
-  "ConstructionRequest": ConstructionRequest,
+  "AdministrableLocation": AdministrableLocation,
   "ConstructionRequestObserver": ConstructionRequestObserver,
+  "ConstructionRequest": ConstructionRequest,
+  "ConstructionTypeLevel": ConstructionTypeLevel,
   "ConstructionType": ConstructionType,
   "Game": Game,
-  "ShipRequest": ShipRequest,
+  "ResearchRequestObserver": ResearchRequestObserver,
+  "ResearchRequest": ResearchRequest,
+  "Research": Research,
   "ShipRequestObserver": ShipRequestObserver,
+  "ShipRequest": ShipRequest,
   "ShipType": ShipType
 };
 

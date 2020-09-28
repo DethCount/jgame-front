@@ -17,7 +17,8 @@ export class AdministrableLocationComponent implements OnInit {
 
   refreshSchedulesFrom = {
     'constructionProduction': {},
-    'shipProduction': {}
+    'shipProduction': {},
+    'researchProduction': {}
   }
 
   nextRefresh: number

@@ -21,6 +21,8 @@ import { ConstructionRequestObserverComponent } from './construction-request-obs
 import { ShipRequestObserverComponent } from './ship-request-observer/ship-request-observer.component'
 import { AdministrableLocationComponent } from './administrable-location/administrable-location.component';
 import { AdministrableLocationBtnComponent } from './administrable-location-btn/administrable-location-btn.component';
+import { ResearchComponent } from './research/research.component';
+import { ResearchRequestObserverComponent } from './research-request-observer/research-request-observer.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "/assets/i18n/", ".json")
@@ -35,7 +37,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     ConstructionRequestObserverComponent,
     ShipRequestObserverComponent,
     AdministrableLocationComponent,
-    AdministrableLocationBtnComponent
+    AdministrableLocationBtnComponent,
+    ResearchComponent,
+    ResearchRequestObserverComponent
   ],
   imports: [
     BrowserModule,

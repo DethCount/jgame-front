@@ -1,0 +1,15 @@
+<div
+    (click)="buildNextLevel($event)"
+    [ngClass]="['research', type.name]"
+    data-toggle="tooltip"
+    [title]="tooltip"
+    >
+    <span
+        class="text"
+        [innerText]="tooltip"
+        ></span>
+    <span
+        class="level"
+        [innerText]="level"
+        ></span>
+</div>

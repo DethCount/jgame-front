@@ -48,3 +48,27 @@
         </div>
     </div>
 </section>
+
+<section *ngIf="administrableLocation.type.canDoResearch">
+    <div class="row">
+        <h3>Recherche</h3>
+        <div class="researches">
+            <app-research
+                *ngFor="let research of administrableLocation.type.researches"
+                [administrableLocation]="administrableLocation"
+                [type]="research"
+                [level]="administrableLocation.researches[research.name]"
+                (build)="onBuild($event)"
+                ></app-research>
+        </div>
+    </div>
+    <div class="row">
+        <h3>Recherches en cours</h3>
+        <div class="researches-production">
+            <app-research-request-observer
+                *ngFor="let observer of administrableLocation.researchProduction"
+                [observer]="observer"
+                ></app-research-request-observer>
+        </div>
+    </div>
+</section>
