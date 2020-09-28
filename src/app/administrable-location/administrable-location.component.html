@@ -1,8 +1,8 @@
-<h2 [innerText]="administrableLocation.name"></h2>
+<h2 [innerText]="administrableLocation.name | translate"></h2>
 
 <section *ngIf="administrableLocation.type.canConstructBuildings">
     <div class="row">
-        <h3>Constructions</h3>
+        <h3 [innerText]="'Constructions' | translate"></h3>
         <div class="constructions">
             <app-construction
                 *ngFor="let constructionType of administrableLocation.type.constructions"
@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-        <h3>Constructions en cours</h3>
+        <h3 [innerText]="'Constructions in progress' | translate"></h3>
         <div class="constructions-production">
             <app-construction-request-observer
                 *ngFor="let observer of administrableLocation.constructionProduction"
@@ -27,7 +27,7 @@
 
 <section *ngIf="administrableLocation.type.canBuildShips">
     <div class="row">
-        <h3>Vaisseaux</h3>
+        <h3 [innerText]="'Ships' | translate"></h3>
         <div class="ships">
             <app-ship
                 *ngFor="let shipType of administrableLocation.type.ships"
@@ -39,7 +39,7 @@
         </div>
     </div>
     <div class="row">
-        <h3>Vaisseaux en cours</h3>
+        <h3 [innerText]="'Ships in progress' | translate"></h3>
         <div class="ships-production">
             <app-ship-request-observer
                 *ngFor="let observer of administrableLocation.shipProduction"
@@ -51,7 +51,7 @@
 
 <section *ngIf="administrableLocation.type.canDoResearch">
     <div class="row">
-        <h3>Recherche</h3>
+        <h3 [innerText]="'Researches' | translate"></h3>
         <div class="researches">
             <app-research
                 *ngFor="let research of administrableLocation.type.researches"
@@ -63,7 +63,7 @@
         </div>
     </div>
     <div class="row">
-        <h3>Recherches en cours</h3>
+        <h3 [innerText]="'Researches in progress' | translate"></h3>
         <div class="researches-production">
             <app-research-request-observer
                 *ngFor="let observer of administrableLocation.researchProduction"

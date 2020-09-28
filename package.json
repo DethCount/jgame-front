@@ -22,7 +22,6 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^5.0.0-alpha1",
-    "ngx-bootstrap": "^6.1.0",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

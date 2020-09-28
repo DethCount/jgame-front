@@ -1,4 +1,6 @@
 {
+    "pts": "pts",
+
     "Metal": "Métal",
     "Silicium": "Silicium",
     "Deuterium": "Deutérium",
@@ -90,5 +92,13 @@
     "Destroyer": "Destroyer",
     "DeathStar": "Etoile de la mort",
     "Halo": "Anneau",
-    "PulsarWell": "Puit à pulsar"
+    "PulsarWell": "Puit à pulsar",
+
+    "First planet": "Planète mère",
+    "Constructions": "Constructions",
+    "Constructions in progress": "Constructions en cours",
+    "Ships": "Vaisseaux",
+    "Ships in progress": "Vaisseaux en cours",
+    "Researches": "Recherches",
+    "Researches in progress": "Recherches en cours"
 }

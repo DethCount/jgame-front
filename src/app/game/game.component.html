@@ -24,7 +24,6 @@
 </ng-template>
 
 <ng-template #singleLocation>
-    <h1>Hello <span [innerText]="game.player"></span></h1>
     <app-administrable-location
         [administrableLocation]="currentAdministrableLocation"
         (refresh)="onAdministrationLocationRefresh($event)"

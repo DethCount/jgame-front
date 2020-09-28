@@ -5,12 +5,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 
-import { ButtonsModule } from 'ngx-bootstrap/buttons'
-import { TabsModule } from 'ngx-bootstrap/tabs'
-import { ModalModule } from 'ngx-bootstrap/modal'
-import { TooltipModule } from 'ngx-bootstrap/tooltip'
-import { CollapseModule } from 'ngx-bootstrap/collapse'
-
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { TranslateModule, TranslateLoader, TranslateCompiler } from '@ngx-translate/core'
 
@@ -52,14 +46,9 @@ export function HttpLoaderFactory(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    ButtonsModule.forRoot(),
-    TabsModule.forRoot(),
-    ModalModule.forRoot(),
-    TooltipModule.forRoot(),
-    CollapseModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
-  exports: [ButtonsModule, TabsModule, ModalModule, TooltipModule, CollapseModule]
+  exports: []
 })
 export class AppModule { }
